@@ -1,0 +1,592 @@
+body {
+    font-family: 'Black Ops One', monospace;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s, color 0.5s;
+    overflow-x: hidden;
+    background-color: #f5f5dc;
+    color: #000;
+}
+header {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 20px 0;
+    cursor: default; 
+}
+header p {
+    text-align: center;
+    font-size: 16px;
+}
+#header-text {
+    cursor: pointer;
+    display: inline; 
+}
+#header-text:hover {
+    color: #6495ED; 
+}
+.feature-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    padding: 100px;
+}
+.card {
+    width: calc(45% - 20px); 
+    margin-bottom: 10px; 
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+.footer {
+    position: fixed;
+    bottom: -60px; 
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    transition: bottom 0.3s; 
+}        
+#toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1050;
+}
+#toggle-btn {
+    cursor: pointer;
+    z-index: 3;
+    font-size: 24px;
+}
+#toggle-btn::before {
+    font-size: 32px;
+    margin-right: 5px;
+}
+#toggle-info {
+    font-size: 18px;
+}
+#toggle-btn::before {
+    content: var(--icon-content);
+}
+body.light-mode {
+    background-color: #f5f5dc;
+    color: #000;
+}
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+.content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: auto;
+    max-width: none;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 2;
+    margin: 20px;
+}
+.gpa-output, .goal-output {
+    margin-top: 20px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    border-radius: 5px;
+}
+#gpa-result, .goal-message {
+    font-size: 24px;
+    font-weight: bold;
+}
+body.dark-mode .gpa-output, body.dark-mode .goal-output {
+    background-color: #333;
+    color: #fff;
+}
+.calculator-content, .profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-content, .attendance-goal-setting {
+    display: flex; 
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap; 
+    width: auto; 
+    margin: 10px;
+}
+.calculator-input, .profile-input, .goal-input {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.calculator-input input, .profile-input input, .goal-input input {
+    margin: 5px 0;
+    padding: 10px;
+    width: 80%;
+}
+.calculator-btn, .profile-btn, .goal-btn {
+    background-color: #6495ED;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.calculator-btn:hover, .profile-btn:hover, .goal-btn:hover {
+    background-color: #4169E1;
+}
+.subject-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+.subject-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    padding: 8px;
+}
+.subject-list-item button {
+    background-color: #DC143C;
+    color: #fff;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.subject-list-item button:hover {
+    background-color: #8B0000;
+}
+#profile-image {
+    position: fixed;
+    top: 80px; 
+    left: 50px; 
+    width: 180px; 
+    height: 180px; 
+    border-radius: 50%; 
+    background-size: cover;
+    background-position: center;
+    display: none; 
+    z-index: 10; 
+}
+#profile-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #6495ED;
+    color: #fff;
+    padding: 16px 32px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Black Ops One', monospace;
+}
+#profile-btn span {
+    font-family: 'Black Ops One', monospace;
+    font-size: inherit; 
+}
+#profile-btn:hover {
+    background-color: #4169E1;
+}
+#profile-customization-content input, .goal-input input[type="number"] {
+    flex-grow: 1;
+    flex-basis:60%;
+    display: flex; 
+    justify-content: space-around; 
+    align-items: start; 
+    flex-wrap: wrap; 
+    width: 200px;             
+    margin: 10px; 
+    padding: 20px;
+}        
+#save-profile, .goal-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #6495ED;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#save-profile:hover, .goal-btn:hover {
+    background-color: #4169E1;
+}
+.goal-message {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+.congrats {
+    color: green;
+}
+.work-harder {
+    color: red;
+}
+.encouragement {
+    color: blue;
+}
+.goal-slider, .slider-scale {
+    display: none; 
+}       
+.custom-slider-scale {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, red 0%, yellow 50%, green 100%);
+    margin-top: 20px;
+}        
+.slider-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.slider-scale span {
+    font-size: 12px;
+}       
+.arrow-marker {
+    position: absolute;
+    top: -10px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+.current-sgpa-arrow {
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: blue;
+    border-width: 10px;
+    margin-left: -10px;
+}
+.goal-sgpa-arrow {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: black;
+    border-width: 10px;
+    margin-left: -10px;
+}
+.show-footer {
+    bottom: 0;
+}
+.back-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000; 
+    border: 1px solid transparent; 
+}
+.back-arrow:hover {
+    background-color: #ddd;
+}
+body.dark-mode .back-arrow {
+background-color: #333; 
+color: #fff; 
+border-color: #fff; 
+}
+.attendance-tracker table {
+    width: 100%;
+    margin: 90px auto;
+    border-collapse: collapse;
+}
+.attendance-tracker th, .attendance-tracker td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+}
+.attendance-tracker th {
+    background-color: #f2f2f2;
+}
+.attendance-input {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#addRow, #calculateAttendance {
+    background-color: #6495ED;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#addRow:hover, #calculateAttendance:hover {
+    background-color: #4169E1;
+}
+body.dark-mode #attendance-content table,
+body.dark-mode #attendance-content th,
+body.dark-mode #attendance-content td {
+    background-color: #333; 
+    color: #fff; 
+    border: 1px solid #777; 
+}
+body.dark-mode #attendance-content .attendance-input {
+    background-color: #555; 
+    color: #fff;
+    border: 1px solid #777;
+}
+body.dark-mode #attendance-content button {
+    background-color: #444; 
+    color: #ddd; 
+}
+body.dark-mode .footer {
+    background-color: #333; 
+    color: #ddd; 
+    border-top: 1px solid #555; 
+}
+#timetable-content {
+    width: 90%; 
+    max-width: 1500px; 
+    margin: 20px auto; 
+    padding: 20px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff; 
+}
+#timetable-content h2 {
+    font-size: 24px; 
+    margin-bottom: 20px;
+}
+.timetable-container {
+    overflow-x: auto; 
+}
+table#timetable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+table#timetable th, table#timetable td {
+    padding: 15px; 
+    border: 1px solid #ddd;
+    text-align: center;
+}
+#addTimeSlot {
+    padding: 12px 25px; 
+    margin-top: 20px;
+    border-radius: 8px; 
+    font-family: inherit; 
+    font-size: inherit; 
+    cursor: pointer; 
+}
+.footer {
+    margin-top: 40px;
+}        
+body.dark-mode #timetable-content table,
+body.dark-mode #timetable-content th,
+body.dark-mode #timetable-content td {
+    background-color: #333;
+    color: #fff; 
+    border: 1px solid #555; 
+}
+body.dark-mode #timetable-content{
+    background-color: #363636;
+
+}
+.timetable-input {
+    background-color: #c7c7c7; 
+    color: #000; 
+    padding: 4px;
+    margin: 4px 2px;
+    width: calc(40% - 8px);
+    border: 1px solid #ccc; 
+}
+body.dark-mode .timetable-input {
+    background-color: #555;
+    color: #fff; 
+    border: 1px solid #777; 
+}       
+body.dark-mode #timetable-content tr {
+    border: 1px solid #555; 
+}        
+body.dark-mode #timetable-content th {
+    border-bottom: none; 
+}
+.special-time-slot {
+    width: 50px; 
+    vertical-align: middle; 
+    text-align: center; 
+    white-space: pre-line; 
+}
+.attendance-increment {
+    background-color: green;
+}
+.attendance-decrement {
+    background-color: red;
+}
+.attendance-btn {
+    padding: 4px 6px;
+    margin-left: 0 2px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 4px;
+}
+#todo-content {
+    width: 80%; 
+    max-width: 1200px; 
+    height: auto; 
+    padding: 40px; 
+    margin-top: 20px; 
+    overflow-y: auto; 
+}
+#addTaskBtn, .add-task-btn, .complete-btn {
+    padding: 15px 25px; 
+    font-size: 18px; 
+    background-color: rgb(65, 206, 241); 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 2px; 
+}
+.task-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 10px 0;
+}
+.task-input {
+    flex-grow: 1; 
+    padding: 15px; 
+    margin-right: 10px; 
+    font-size: 18px; 
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+#tasksContainer {
+    width: 100%; 
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+.task-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: center; 
+}
+.task {
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: calc(100% - 160px); 
+    text-align: center;
+    margin-right: 10px;
+    box-sizing: border-box; 
+}
+@keyframes colorChange {
+    to {
+        background-color: rgb(0, 189, 25); 
+    }
+}
+.complete-btn {
+    padding: 15px 25px;
+    font-size: 18px;
+    background-color: rgb(65, 206, 241);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 2s linear;
+}
+.complete-btn.active {
+    background-color: rgb(0, 189, 25);
+}        
+body.dark-mode .task {
+    background-color: #333; 
+    color: #fff; 
+}
+.profile-attendance-container {
+    display: none; 
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    margin: auto;
+}
+.attendance-goal-setting {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 5px;
+    margin-left: 1500px;
+    padding: 50px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: rgb(245, 245, 220);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+.attendance-goal-input {
+    margin-bottom: 10px; 
+    margin-left: 40px;
+}
+.attendance-goal-input input {
+    width: 100%; 
+    padding: 80px;
+    font-size: 20px; 
+    margin-bottom: 10px; 
+    border-radius: 4px; 
+    border: 2px solid #ccc; 
+}
+.goal-btn {
+    padding: 15px 30px; 
+    font-size: 25px; 
+    border-radius: 5px; 
+    cursor: pointer;
+    border: none; 
+    background-color: #6495ED; 
+    color: white; 
+    width: 100; 
+    display: inline-block;
+    margin: 0 auto; 
+    text-align: center; 
+}
+.attendance-goal-input input,
+.attendance-goal-input button {
+    width: auto; 
+    margin: 5px 0; 
+    padding: 5px; 
+}
+body.dark-mode .attendance-goal-setting {
+    background-color: #333;
+    color: #fff; 
+    border-color: #555;
+}
